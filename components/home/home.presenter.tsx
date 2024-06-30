@@ -1,5 +1,6 @@
 import * as S from "@/components/home/home.style";
 import { HomePresenterProps } from "./home.type";
+import ThemeItem from "./themeItem/themeItem";
 
 export default function HomePresenter({ themeList }: HomePresenterProps) {
   return (
@@ -12,7 +13,7 @@ export default function HomePresenter({ themeList }: HomePresenterProps) {
           .sort(() => 0.5 - Math.random())
           .slice(0, 8)
           .map((item: any) => (
-            <S.Theme>{item.name}</S.Theme>
+            <ThemeItem itemId={item.id}>{item.name}</ThemeItem>
           ))}
       </S.Themes>
     </S.Wrapper>

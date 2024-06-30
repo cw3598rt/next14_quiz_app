@@ -1,22 +1,17 @@
-import HomePresenter from './home.presenter';
-import { getThemes } from './home.quiery';
+import HomePresenter from "./home.presenter";
+import { getThemes } from "./home.query";
 
-export default async function HomeContainer (){
-    let themeList;
+export default async function HomeContainer() {
+  let themeList;
 
-try{
+  try {
     themeList = await getThemes();
-    if(themeList.length ===0){
-        return <div>
-            no data.
-        </div>
+    if (themeList.length === 0) {
+      return <div>no data.</div>;
     }
-
-}catch(e){
+  } catch (e) {
     throw new Error("connection is not available");
-}
+  }
 
-    return(
-        <HomePresenter themeList={themeList}/>
-    )
+  return <HomePresenter themeList={themeList} />;
 }
