@@ -1,7 +1,13 @@
 import { styled } from "@/styled-system/jsx";
 
 export const Button = styled.button`
-  background-color: grey;
+  &[data-picked="false"] {
+    background-color: grey;
+  }
+  &[data-picked="true"] {
+    background-color: green;
+    color: white;
+  }
   display: flex;
   flex-direction: row;
   justify-content: center;

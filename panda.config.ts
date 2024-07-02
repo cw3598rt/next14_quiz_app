@@ -1,3 +1,4 @@
+import { token } from "@/styled-system/tokens";
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
@@ -9,10 +10,24 @@ export default defineConfig({
 
   // Files to exclude
   exclude: [],
+  conditions: {
+    something: "&:is([data-something])",
+  },
 
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        bar1: {
+          "0%": { backgroundColor: "red" },
+          "100%": { backgroundColor: "yellow" },
+        },
+        bar2: {
+          "0%": { backgroundColor: "yellow" },
+          "100%": { backgroundColor: "red" },
+        },
+      },
+    },
   },
 
   // The output directory for your css system

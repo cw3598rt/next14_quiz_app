@@ -11,4 +11,7 @@ export interface QuizItemPresenterProps {
   onClickAnswer: (answer: string) => void;
   currentQuestion: any;
   answerList: any[];
+  isCorrect: boolean | "haven't chosen";
+  onClickNext: () => void;
+  pickedAnswer: string;
 }
