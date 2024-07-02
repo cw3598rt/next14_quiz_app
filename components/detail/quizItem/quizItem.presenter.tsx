@@ -27,6 +27,7 @@ export default function QuizItemPresenter({
             onClickAnswer={onClickAnswer}
             item={item}
             pickedAnswer={pickedAnswer}
+            currentQuestion={currentQuestion}
           />
         ))}
       </S.AnswerBox>

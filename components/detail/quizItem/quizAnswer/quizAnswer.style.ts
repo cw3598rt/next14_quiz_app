@@ -8,6 +8,10 @@ export const Button = styled.button`
     background-color: green;
     color: white;
   }
+  &[data-correctanswer="true"] {
+    background-color: orange;
+    color: white;
+  }
   display: flex;
   flex-direction: row;
   justify-content: center;

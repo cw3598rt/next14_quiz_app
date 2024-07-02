@@ -2,6 +2,8 @@ import { useRouter } from "next/navigation";
 import QuizItemPresenter from "./quizItem.presenter";
 import { QuizItemContainerProps } from "./quizItem.type";
 import { useMemo, useState } from "react";
+import { useRecoilState } from "recoil";
+import { pickedAnswerListState } from "@/commons/store";
 
 export default function QuizItemContainer({
   questionNo,
@@ -10,7 +12,7 @@ export default function QuizItemContainer({
 }: QuizItemContainerProps) {
   const router = useRouter();
   const [pickedAnswer, setPickedAnswer] = useState("");
-  const [pickedAnswerList, setPickedAnswerList] = useState([""]);
+  const [, setPickedAnswerList] = useRecoilState(pickedAnswerListState);
 
   const answerList = useMemo(
     () =>
@@ -25,14 +27,21 @@ export default function QuizItemContainer({
 
   const onClickAnswer = (answer: string) => {
     setPickedAnswer(answer);
+
     setPickedAnswerList((prev) =>
-      [...prev, answer].filter((item) => item != ""),
+      [
+        ...prev,
+        {
+          pickedAnswer: answer,
+          isCorrect: currentQuestion?.correct_answer === answer,
+        },
+      ].filter((item) => item.pickedAnswer !== ""),
     );
   };
 
   const onClickNext = () => {
     if (questionNo > 8) {
-      router.push("/");
+      router.replace("/result");
     } else {
       setQuestionNo((prev) => prev + 1);
     }
@@ -42,7 +51,7 @@ export default function QuizItemContainer({
   const isCorrect = pickedAnswer
     ? currentQuestion?.correct_answer === pickedAnswer
     : "haven't chosen";
-  console.log(pickedAnswerList);
+
   return (
     <QuizItemPresenter
       questionNo={questionNo}
